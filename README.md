@@ -54,7 +54,8 @@ The system is engineered using a robust **3-Tier Architecture (View - Controller
 
 ## 🤝 Contributors
 *   **Phan Anh Minh** - *Core Logic, UI/UX Design & Architecture*
-*   *(Add teammate names and roles here)*
+*   **Le Ngoc Khang Duy** - *Storage Layer*
+*   **Le Tri Dung** - Documentation
 
 ---
 *Developed during the Winter Semester - Object-Oriented Programming Course.*
