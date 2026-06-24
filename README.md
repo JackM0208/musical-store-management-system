@@ -1,104 +1,60 @@
-# Hướng dẫn Setup cho Team
+# 🎸 Music Store Management System
 
-Để chạy được dự án này, máy các ông cần cài:
+## 📖 Overview
+The Music Store Management System is a comprehensive desktop application developed to streamline inventory operations for music store employees. Designed to manage musical instruments efficiently, this system minimizes manual tracking errors and provides a centralized platform for staff to oversee store assets. 
 
-1. **Java:** - Cài JDK 11 (để chạy App).
-   - Cài JDK 21 (để VS Code không báo lỗi).
-2. **Maven:** Tải Maven về máy (nếu VS Code lỗi thì trỏ đường dẫn vào).
-3. **SceneBuilder:** Tải và cài đặt SceneBuilder mới nhất.
-4. **VS Code Extensions:** Khi mở project, nó hỏi cài extension thì bấm "Install All" nhé.
+This project was developed as a core assignment for the Object-Oriented Programming (OOP) module, demonstrating the practical application of OOP principles, relational database management, and modern GUI development.
 
-**Cách chạy:**
-- Mở Menu Maven bên trái -> Plugins -> javafx -> javafx:run
+## 🏗️ Architecture
+The system is engineered using a robust **3-Tier Architecture (View - Controller - Storage)**, ensuring a clean separation of concerns, scalability, and ease of maintenance:
 
-# Musical_Store_Management_App
+*   **View Layer (Presentation):** Responsible for the user interface and user interactions. Initial UI/UX layouts were prototyped using **Figma**, ensuring an intuitive user journey, before being strictly implemented using **JavaFX** and **SceneBuilder**.
+*   **Controller Layer (Business Logic):** Acts as the bridge between the View and the Storage layers. It processes user inputs, enforces business rules (e.g., data validation for instrument prices and stock levels), and handles the core application logic.
+*   **Storage Layer (Data Access):** Manages all database interactions. It executes SQL queries to persist, update, retrieve, and delete instrument records from the underlying relational database securely.
 
-1. App mình là một cái desktop app, dành cho employee/staff. 
-2. UI:
-  - GUI 
-    - Nếu bị dí thì dùng Java Swing 
-    - Nếu không bị dí thì dùng JavaFX
-3. App này có chức năng:
-  - Quản lí các mặt hàng (instrument hoặc accessory)
-  - Quản lí và theo dõi nhân viên
-  - Thu thập thông tin cơ bản của khách hàng để tạo ra ORDER
-  - Khả năng chỉnh sửa mặt hàng (thêm/xóa/sửa object) HOẶC tin chỉnh hệ thống lâu dài
-  - ...
-4. Database:
-  - Xài filehandling
+## 💻 Tech Stack
+*   **Language:** Java
+*   **Build Tool:** Maven (Dependency management and project building)
+*   **GUI Framework:** JavaFX (FXML)
+*   **UI Prototyping & Layout:** Figma, SceneBuilder
+*   **Database:** MySQL
+*   **Paradigm:** Object-Oriented Programming (OOP)
 
----------------------------------------------------------------------------------------------
+## ✨ Core Features
+*   **Dashboard Overview:** A centralized view displaying current inventory metrics and low-stock alerts.
+*   **Instrument Management (CRUD):**
+    *   **Create:** Add new musical instruments with details such as category (e.g., Guitars, Keys, Percussion), brand, model, price, and stock quantity.
+    *   **Read:** Search and filter instruments based on specific criteria.
+    *   **Update:** Modify existing instrument details or restock quantities.
+    *   **Delete:** Remove discontinued or damaged items from the system.
+*   **Employee Access:** Secure environment tailored specifically for store staff operations.
 
-Class InventoryManager
-  Responsibility:
-    - Store a list of Product
-    - GET information of a specific product (price, quantity,...)
-    - Note: this class does not change/alter the value of Product objects
-    - Store database as FileHandling
-  Attributes:
-    - A private list of Product
-    - A private final file containing database
-  Methods:
-    - constructor + loadData()
-    - add a new item
-    - get all items
-    - find item using its ID
-    - load data (from a database to the list of Product)
-    - save data (write to text file database)
+## ⚙️ Installation & Setup
 
+### Prerequisites
+*   [Java Development Kit (JDK) 11+](https://www.oracle.com/java/technologies/downloads/)
+*   [Apache Maven](https://maven.apache.org/download.cgi)
+*   [MySQL Server](https://dev.mysql.com/downloads/mysql/)
 
----------------------------------------------------------------------------------------------
+### Local Development Setup
+1. **Clone the repository:**
+   `git clone https://github.com/YOUR_GITHUB_USERNAME/music-store-management.git`
+   `cd music-store-management`
 
-Class Product
-  Responsibility:
-    - Abstract for the layers Instrument & Accessory
-  Attributes:
-    - id, name, brand, sellingPrice, quantityStock
-  Methods:
-    - get(), set()
-    - checkStock() check for the availability of the item.
+2. **Database Configuration:**
+   * Open your MySQL client and create a new database: `CREATE DATABASE music_store_db;`
+   * Execute the provided `schema.sql` (located in the `src/main/resources/db` directory) to generate the necessary tables.
+   * Update the database credentials (URL, Username, Password) in the Storage layer configuration file (e.g., `application.properties` or `DatabaseConnection.java`).
 
----------------------------------------------------------------------------------------------
+3. **Build the project:**
+   `mvn clean install`
 
-Class Instrument
-  Responsibility:
-    - Abstract for the layers Guitar, Piano, ...
-  Attributes:
-    - type, color, isElectric
-  Methods:
-    - get(), set()
+4. **Run the application:**
+   `mvn javafx:run`
 
----------------------------------------------------------------------------------------------
+## 🤝 Contributors
+*   **Phan Anh Minh** - *Core Logic, UI/UX Design & Architecture*
+*   *(Add teammate names and roles here)*
 
-Class Accessory
-  Responsibility:
-  Attributes:
-    - Type (accessories of ... (instru))
-    - color, isElectric
-  Methods:
-    - get(), set()
-
-
-
-
-
-
-Tóm tắt Mô hình Thiết kế (Entity Model)
-1. Product.java (Abstract Class): Chứa id, price, stock.
-2. Instrument.java (Abstract Class) extends Product: Chứa các thuộc tính riêng của nhạc cụ (ví dụ: type, numberOfStrings—nếu bạn đẩy xuống lớp con).
-3. Accessory.java (Concrete Class) extends Product: Chứa các thuộc tính riêng của phụ kiện (ví dụ: material, compatibility).
-4. InventoryManager.java (Service Class): Chứa List<Product> để quản lý tất cả các mặt hàng một cách thống nhất.
-
-Class INHERITANCE
-  Attributes:
-
-  Methods:
-    - constructor (tạo object STOCK mới; yêu cầu tất cả attribute phải điền đủ)
-      tạo constructor mặc định (STOCK rỗng) và constructor có tham số
-    - get_all() / làm thêm hàm get cho từng attribute 
-    - set_all(nameStk, cateStk,..., priceStk) / (làm thêm hàm set cho từng attribute)
-
-
-Lớp Product (Class Cha cao nhất) nên chứa tất cả các thuộc tính và hành vi chung cho mọi thứ trong cửa hàng:Thuộc tính (States)Kiểu dữ liệuLý doidStringID duy nhất để quản lý kho hàng.nameStringTên chung (ví dụ: "Dây đàn Elixir").brandStringThương hiệu.sellingPricedoubleGiá bán ra (cốt lõi của kinh doanh).quantityInStockintSố lượng tồn kho (cốt lõi của quản lý kho).Phương thức (Behaviors)Vai tròGhi chúpublic abstract String getDescription()Bắt buộc phải được triển khai bởi tất cả các lớp con.Đa hình.public boolean checkStock()Kiểm tra còn hàng hay không.Dùng chung cho mọi sản phẩm.
-
-
+---
+*Developed during the Winter Semester - Object-Oriented Programming Course.*
